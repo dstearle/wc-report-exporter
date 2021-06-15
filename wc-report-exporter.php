@@ -1,12 +1,9 @@
 <?php
 /**
- * Plugin Name: Endo Stock Report Exporter
- * Plugin URI: http://www.endocreative.com
- * Description: A custom stock report exporter plugin for WooCommerce
+ * Plugin Name: WC Report Exporter
+ * Plugin URI: https://github.com/dstearle/wc-report-exporter
+ * Description: A WordPress plugin for exporting WooCommerce reports.
  * Version: 1.0.0
- * Author: Endo Creative
- * Author URI: http://www.endocreative.com
- * License: GPL2
  */
 
 // Exit if accessed directly
