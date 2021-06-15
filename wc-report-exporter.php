@@ -135,3 +135,16 @@ function generate_report_csv() {
 	endwhile;
 
 }
+
+// Scheduled Event
+function cronstarter_activation() {
+
+    if( !wp_next_scheduled( 'mycronjob' ) ) { 
+
+       wp_schedule_event( time(), 'daily', 'mycronjob' );
+
+    }
+    
+}
+
+add_action('wp', 'cronstarter_activation');
