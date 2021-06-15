@@ -1,26 +1,25 @@
 <?php
 /**
- * Plugin Name: Endo Stock Report Exporter
- * Plugin URI: http://www.endocreative.com
- * Description: A custom stock report exporter plugin for WooCommerce
+ * Plugin Name: WC Report Exporter
+ * Plugin URI: https://github.com/dstearle/wc-report-exporter
+ * Description: A WordPress plugin for exporting WooCommerce reports.
  * Version: 1.0.0
- * Author: Endo Creative
- * Author URI: http://www.endocreative.com
- * License: GPL2
  */
 
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-// create top level admin menu
-add_action('admin_menu', 'endo_stock_report_admin_menu');
-function endo_stock_report_admin_menu() {
+// Admin Menu (Top Level)
+function wc_report_admin_menu() {
   
-  add_menu_page('Stock Report Export', 'Stock Report Export', 10, 'endo_stock_report', 'endo_admin_stock_report_page');
+  add_menu_page('WC Report Export', 'WC Report Export', 10, 'wc_report_export', 'wc_report_export_admin_page');
 
 }
 
-function endo_admin_stock_report_page() {
+add_action('admin_menu', 'wc_report_admin_menu');
+
+// Admin Page
+function wc_report_export_admin_page() {
 
 	?>
 	<div class="wrap">
@@ -29,7 +28,7 @@ function endo_admin_stock_report_page() {
         <p>Click export below to generate a stock report of the products on this site.</p>
 
       	<form method="post" id="export-form" action="">
-            <?php submit_button('Export Stock Report', 'primary', 'download_csv' ); ?>
+            <?php submit_button('WC Report Export', 'primary', 'download_csv' ); ?>
         </form>
 
     </div>
@@ -37,14 +36,14 @@ function endo_admin_stock_report_page() {
 }
 
 
-add_action('admin_init', 'endo_stock_report_admin_init');
-function endo_stock_report_admin_init() {
+// Admin Init
+function wc_report_export_admin_init() {
 
 	global $plugin_page;
 
-	if ( isset($_POST['download_csv']) && $plugin_page == 'endo_stock_report' ) {
+	if ( isset($_POST['download_csv']) && $plugin_page == 'wc_report_export' ) {
 	   
-	   	generate_stock_report_csv();
+	   	generate_report_csv();
 	    
 	    die();
 
@@ -52,8 +51,10 @@ function endo_stock_report_admin_init() {
 
 }
 
+add_action('admin_init', 'wc_report_export_admin_init');
 
-function generate_stock_report_csv() {
+// Generate Report
+function generate_report_csv() {
 
 	// output headers so that the file is downloaded rather than displayed
 	header('Content-Type: text/csv; charset=utf-8');
