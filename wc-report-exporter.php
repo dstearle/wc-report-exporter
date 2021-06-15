@@ -144,7 +144,22 @@ function cronstarter_activation() {
        wp_schedule_event( time(), 'daily', 'mycronjob' );
 
     }
-    
+
 }
 
 add_action('wp', 'cronstarter_activation');
+
+// Scheduled Reports
+function my_repeat_function() {
+
+    $recepients = 'dearle@krgops.com';
+    $subject = 'LBS Reports';
+    $message = 'This is a test mail sent by WordPress automatically as per your schedule.';
+
+    // Mails the reports 
+    mail($recepients, $subject, $message);
+
+}
+
+// Hooks onto the scheduled event
+add_action ('mycronjob', 'my_repeat_function'); 
